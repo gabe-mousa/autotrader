@@ -1,0 +1,45 @@
+[project]
+name = "autotrader"
+version = "0.1.0"
+description = "Personal localhost algorithmic trading platform (Schwab)"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.30",
+    "pydantic>=2.8",
+    "pydantic-settings>=2.4",
+    "httpx>=0.27",
+    "websockets>=13.0",
+    "apscheduler>=3.10",
+    "structlog>=24.0",
+    "pyyaml>=6.0",
+    "aiosqlite>=0.20",
+    "cryptography>=43.0",
+    "numpy>=2.0",
+    "pandas>=2.2",
+    "anthropic>=0.40",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.24",
+    "ruff>=0.6",
+]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["app", "app.auth", "app.schwab", "app.api", "app.marketdata",
+            "app.streamer", "app.indicators", "app.strategy", "app.backtest", "app.ai",
+            "app.broker", "app.execution", "app.runtime", "app.optimize"]
+
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100

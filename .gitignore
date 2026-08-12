@@ -1,0 +1,65 @@
+# secrets — never commit
+.env
+*.pem
+tokens.json
+
+# Claude Code runtime state — machine/session-specific, not portable
+.claude/scheduled_tasks.lock
+.claude/settings.local.json
+
+# python
+backend/.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+
+# node
+frontend/node_modules/
+frontend/dist/
+
+# app data
+data/
+*.db
+*.db-wal
+*.db-shm
+
+# os/editor
+.DS_Store
+backend/*.egg-info/
+
+# --- not for public sharing: personal trading data / research / working notes ---
+# Kept on disk (this is still your working directory) but never committed.
+strategies/
+research/
+151tradingstrategies.pdf
+schwab/
+
+# internal session/working notes (readmes elsewhere are fine, these aren't)
+LIVING-DOC.md
+PLANNING_PROMPT.md
+RESEARCH.md
+RESEARCH-ROUND6-PROMPT.md
+docs/*
+docs/AUDIT-2026-07.md
+docs/AUDIT-2026-07-RESOLVED.md
+docs/HANDOFF-2026-07-29.md
+docs/RUFF-BASELINE.md
+docs/PUBLIC-RELEASE-INVESTIGATION.md
+docs/plan/01-architecture.md
+docs/plan/02-strategy-schema.md
+docs/plan/03-ai-integration.md
+docs/plan/04-market-data.md
+docs/plan/05-backtest-engine.md
+docs/plan/06-execution-safety.md
+docs/plan/07-paper-trading.md
+docs/plan/08-runtime-concurrency.md
+docs/plan/09-ui-ux.md
+docs/plan/10-data-model.md
+docs/plan/11-roadmap.md
+docs/plan/12-open-questions.md
+docs/plan/13-future-options.md
+docs/plan/14-optimizer.md
+docs/plan/15-shorting-and-expressiveness.md
+docs/plan/16-options-trading.md
+# docs/plan/README.md intentionally NOT ignored — readmes stay public

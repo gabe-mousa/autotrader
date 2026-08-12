@@ -1,0 +1,171 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: dark;
+}
+
+:root.light {
+  color-scheme: light;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background-color: #0b0e14;
+  color: #d1d5db;
+  font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
+}
+
+:root.light body {
+  background-color: #efece7;
+  color: #3a3d42;
+}
+
+/*
+ * Light mode.
+ *
+ * The app was built dark-first: components use hardcoded dark-oriented
+ * Tailwind utilities (bg-[#151412], text-gray-300, border-white/10, ...)
+ * directly instead of a dark: variant. Rather than touch every component,
+ * light mode is a global remap of those same utility classes, scoped under
+ * the `.light` class the theme toggle puts on <html>. Each rule below has
+ * the same two-class specificity, so this block only needs to load after
+ * Tailwind's utilities (it does, being lower in this file) to win.
+ *
+ * Kept deliberately soft: muted warm-gray surfaces instead of stark white,
+ * no near-black text, and accent colors pulled down a notch from their
+ * dark-mode brightness so they don't read as neon against a pale page.
+ */
+
+/* Page/panel surfaces that use the app's dark brand hex colors. Slightly
+   off-white and a touch warm, so panels don't glare against the page bg. */
+:root.light .bg-\[\#151412\],
+:root.light .bg-\[\#1d1a17\],
+:root.light .bg-\[\#191613\] {
+  background-color: #f9f7f4;
+}
+
+/* Base body-level surface classes some pages set directly. */
+:root.light .bg-\[\#0b0e14\] {
+  background-color: #efece7;
+}
+
+/* Neutral text scale: dark mode goes light-text-on-dark-bg (gray-100 is
+   near-white, gray-600 is dim); light mode inverts that ordering. Darkest
+   stop is a soft charcoal, not black, to keep contrast comfortable. */
+:root.light .text-white { color: #34383e; }
+:root.light .text-gray-100 { color: #34383e; }
+:root.light .text-gray-200 { color: #3f4349; }
+:root.light .text-gray-300 { color: #52565c; }
+:root.light .text-gray-400 { color: #6b6f75; }
+:root.light .text-gray-500 { color: #83878d; }
+:root.light .text-gray-600 { color: #999da3; }
+:root.light .text-gray-700 { color: #adb0b6; }
+:root.light .text-neutral-200 { color: #3f4349; }
+:root.light .text-neutral-400 { color: #6b6f75; }
+:root.light .text-neutral-500 { color: #83878d; }
+:root.light .fill-gray-400 { fill: #6b6f75; }
+:root.light .fill-gray-500 { fill: #83878d; }
+
+:root.light .hover\:text-gray-200:hover { color: #3f4349; }
+:root.light .hover\:text-gray-300:hover { color: #52565c; }
+:root.light .hover\:text-gray-400:hover { color: #6b6f75; }
+:root.light .placeholder\:text-gray-600::placeholder { color: #adb0b6; }
+
+/* White/black translucency: dark mode washes light onto a dark surface for
+   borders/hover fills; light mode needs the inverse (dark onto light), kept
+   faint so borders read as structure, not lines. */
+:root.light .border-white\/5 { border-color: rgb(0 0 0 / 0.04); }
+:root.light .border-white\/10 { border-color: rgb(0 0 0 / 0.07); }
+:root.light .border-white\/15 { border-color: rgb(0 0 0 / 0.09); }
+:root.light .border-white\/20 { border-color: rgb(0 0 0 / 0.12); }
+:root.light .ring-white\/10 { --tw-ring-color: rgb(0 0 0 / 0.07); }
+:root.light .bg-white\/5 { background-color: rgb(0 0 0 / 0.025); }
+:root.light .bg-white\/10 { background-color: rgb(0 0 0 / 0.045); }
+:root.light .bg-white { background-color: #f9f7f4; }
+:root.light .bg-black\/20 { background-color: rgb(0 0 0 / 0.05); }
+:root.light .text-white\/40 { color: rgb(58 61 66 / 0.5); }
+:root.light .text-white\/50 { color: rgb(58 61 66 / 0.6); }
+:root.light .text-white\/70 { color: rgb(58 61 66 / 0.8); }
+
+:root.light .hover\:bg-white:hover { background-color: #f1eee9; }
+:root.light .hover\:bg-white\/5:hover { background-color: rgb(0 0 0 / 0.025); }
+:root.light .hover\:bg-white\/10:hover { background-color: rgb(0 0 0 / 0.045); }
+:root.light .hover\:bg-white\/20:hover { background-color: rgb(0 0 0 / 0.07); }
+
+:root.light .border-neutral-700 { border-color: #ded9d2; }
+:root.light .border-neutral-800 { border-color: #e6e2db; }
+:root.light .bg-neutral-900 { background-color: #f1eee9; }
+:root.light .bg-slate-400\/60 { background-color: rgb(148 163 184 / 0.3); }
+
+/* Saturated accent text: dark-mode picks pale/bright shades (amber-200,
+   teal-300, ...) for contrast against a near-black background. Mapped to
+   muted mid-tones here rather than the darkest 800/900 swatches — enough
+   contrast to read, without turning into a harsh, saturated accent color
+   against the soft page background. Accent backgrounds/borders stay as-is —
+   they're used at low opacity as tinted badges and hold up fine as-is. */
+:root.light .text-amber-100 { color: #a15c1f; }
+:root.light .text-amber-200 { color: #a15c1f; }
+:root.light .text-amber-300 { color: #a15c1f; }
+:root.light .text-amber-400 { color: #ad6a1f; }
+:root.light .text-amber-500 { color: #ad6a1f; }
+:root.light .text-teal-200 { color: #2a8c82; }
+:root.light .text-teal-300 { color: #2a8c82; }
+:root.light .text-teal-400 { color: #2a8c82; }
+:root.light .text-emerald-200 { color: #2f8c66; }
+:root.light .text-emerald-300 { color: #2f8c66; }
+:root.light .text-emerald-400 { color: #2f8c66; }
+:root.light .text-red-200 { color: #c0413f; }
+:root.light .text-red-300 { color: #c0413f; }
+:root.light .text-red-400 { color: #c0413f; }
+:root.light .text-rose-300 { color: #c1436a; }
+:root.light .text-orange-300 { color: #b1631f; }
+:root.light .text-green-300 { color: #3f8c4e; }
+
+:root.light .text-amber-100\/90 { color: rgb(161 92 31 / 0.9); }
+:root.light .text-amber-200\/60 { color: rgb(161 92 31 / 0.6); }
+:root.light .text-amber-200\/70 { color: rgb(161 92 31 / 0.7); }
+:root.light .text-amber-200\/80 { color: rgb(161 92 31 / 0.8); }
+:root.light .text-amber-200\/90 { color: rgb(161 92 31 / 0.9); }
+:root.light .text-amber-300\/80 { color: rgb(161 92 31 / 0.8); }
+:root.light .text-amber-300\/90 { color: rgb(161 92 31 / 0.9); }
+:root.light .text-amber-400\/70 { color: rgb(173 106 31 / 0.8); }
+:root.light .text-amber-500\/70 { color: rgb(173 106 31 / 0.8); }
+:root.light .text-red-300\/80 { color: rgb(192 65 63 / 0.8); }
+:root.light .text-red-400\/80 { color: rgb(192 65 63 / 0.8); }
+:root.light .text-teal-400\/80 { color: rgb(42 140 130 / 0.8); }
+
+:root.light .hover\:text-amber-100:hover { color: #a15c1f; }
+:root.light .hover\:text-amber-200:hover { color: #a15c1f; }
+:root.light .hover\:text-amber-300:hover { color: #a15c1f; }
+:root.light .hover\:text-teal-100:hover { color: #2a8c82; }
+:root.light .hover\:text-teal-400:hover { color: #2a8c82; }
+:root.light .hover\:text-emerald-300:hover { color: #2f8c66; }
+:root.light .hover\:text-red-400:hover { color: #c0413f; }
+
+:root.light .fill-amber-300\/80 { fill: rgb(161 92 31 / 0.8); }
+:root.light .fill-emerald-300\/80 { fill: rgb(47 140 102 / 0.8); }
+:root.light .fill-rose-300\/80 { fill: rgb(193 67 106 / 0.8); }
+
+/* Solid accent buttons/badges: dark-mode uses saturated 500/600 swatches
+   that pop against a near-black page; on a soft light page those same
+   swatches read as neon, so they're dialed back a little here. */
+:root.light .bg-emerald-600 { background-color: #3f9670; }
+:root.light .hover\:bg-emerald-500:hover { background-color: #359c78; }
+:root.light .bg-emerald-500 { background-color: #359c78; }
+:root.light .bg-red-600 { background-color: #c1514f; }
+:root.light .hover\:bg-red-500:hover { background-color: #c65f5d; }
+:root.light .bg-red-500 { background-color: #c65f5d; }
+:root.light .bg-teal-600 { background-color: #3a9a90; }
+:root.light .hover\:bg-teal-500:hover { background-color: #45a094; }
+:root.light .bg-amber-500 { background-color: #c98a3a; }
+:root.light .bg-amber-600 { background-color: #bd7d31; }
+:root.light .hover\:bg-amber-500:hover { background-color: #c98a3a; }
+
+/* Scrollbars: WebKit only, matches the panel surface either way. */
+:root.light ::-webkit-scrollbar-thumb { background-color: rgb(0 0 0 / 0.12); }
