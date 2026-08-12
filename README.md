@@ -69,9 +69,85 @@ committed).
 ## Safety notes
 
 - Live order placement is opt-in and off by default (`LIVE_PROBE_ENABLED=false`
-  in `.env`). Paper trading (simulated fills against real streamed quotes) is
+  in `.env`, or toggle it from Settings → Live trading once the app is
+  running). Paper trading (simulated fills against real streamed quotes) is
   the default and only path to accumulating evidence for the promotion gate.
 - Naked/uncovered short options are blocked at the schema, lint, gateway, and
   broker layers — not just discouraged.
 - This is a personal tool, not investment advice. Nothing here is a
   recommendation to trade any particular strategy or instrument.
+
+## First-time setup
+
+What to do the first time you run this app, in order. Everything here can be
+changed later — nothing is permanent. (The in-app Docs page has this same
+walkthrough, plus a lot more reference material, once you're running.)
+
+1. **Get a Schwab developer app.** This app trades through your own Schwab
+   account, so it needs its own registration on Schwab's developer portal —
+   free, but with a few concrete steps:
+   - Create an account at [developer.schwab.com](https://developer.schwab.com)
+     using your regular Schwab login.
+   - Create a new app. You'll be asked which API products to subscribe to —
+     pick both **Trader API - Individual** (for accounts/orders) and
+     **Market Data Production** (for quotes/candles/streaming); this app
+     needs both.
+   - Set the callback URL to exactly `https://127.0.0.1:8443/oauth/callback`
+     — it must match character-for-character against what's in `.env`
+     (`SCHWAB_CALLBACK_URL`). Schwab requires HTTPS even for a local
+     redirect like this one.
+   - Submit the app. Schwab has to approve new apps before they're usable —
+     this isn't instant approval, so expect to wait anywhere from a few
+     hours to a few days before the app shows as active in the portal.
+     There's nothing to do on your end in the meantime but check back.
+   - Once approved, the app's detail page in the portal shows its
+     **Client ID** and **Client Secret** — that's what goes into `.env` (or
+     Settings) in the next step.
+
+2. **Add your credentials.** Either paste the client ID/secret into `.env`
+   directly, or run the app and enter them on the Settings page — Settings
+   saves straight back into `.env` for you. Either way, the backend needs a
+   restart afterward to pick up new values.
+
+3. **Connect Schwab.** On the Settings page, click "Connect Schwab" — it
+   opens Schwab's own login/consent page in a new tab. Once approved, the
+   app holds a token it refreshes automatically; you'll only need to redo
+   this when the 7-day refresh token lapses.
+
+4. **Add symbols to start recording data.** On the Data page, add the
+   symbols you're interested in and run a backfill. This gets you years of
+   daily history instantly; for intraday timeframes, the app only has what
+   it has recorded, so the sooner a symbol is added the more history you'll
+   have to test against later.
+
+5. **Build and backtest a strategy.** Go to Strategies and create one — by
+   hand, or from a plain-English description if you've added an Anthropic
+   API key (optional, only needed for AI-assisted generation). Run a
+   backtest before doing anything else with it.
+
+6. **Paper trade before anything real.** Start a paper run from Running —
+   simulated fills against real live quotes, no real money at risk. This is
+   required before a strategy is eligible to go live at all.
+
+A few levers worth knowing about early:
+
+- **Max total notional** (Settings → Global risk limits) — the most dollar
+  value you can have deployed across every open position at once, added up
+  across all strategies. It's a ceiling on total exposure, not a per-trade
+  limit.
+- **Max total daily loss** (same section) — once everything running together
+  has lost more than this in a day, new entries are blocked for the rest of
+  the day. Existing positions can still be closed — this only stops new risk
+  from being added on top of a bad day.
+- **Live order placement** is off by default everywhere in the app. Turn it
+  on from Settings → Live trading — no need to touch `.env` by hand. Turning
+  it on doesn't place any orders by itself: a strategy still has to be
+  deliberately promoted to live after paper trading, and the standalone Live
+  probe page (for placing manual test orders) is gated behind this same
+  switch.
+- **The kill switch** stops all new order placement everywhere, instantly,
+  regardless of what any strategy is doing — good to know it exists before
+  you need it.
+- **The promotion gate** sets the minimum paper-trading track record — days
+  elapsed and round-trip trades — a strategy needs before it can go live.
+  The defaults are conservative on purpose.
