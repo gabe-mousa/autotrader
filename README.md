@@ -6,7 +6,7 @@ personal Charles Schwab brokerage account.
 
 This is made for technical people to trade in an easy non-technical way.
 It's not the easiest lift to get the application working and setting up strategies,
-and I would be surprised if anyone is able to make instant profits (especially outpacing SPY) without much effort,
+and I would be surprised if anyone is able to make instant profits (especially outpacing SPY) without much effort or a finance background,
 but feel free to give it a shot and if you want to email, or dm me on socials I'm happy
 to talk about the project more. 
 
