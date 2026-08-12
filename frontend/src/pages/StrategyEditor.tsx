@@ -284,7 +284,7 @@ export default function StrategyEditor() {
       )}
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_320px]">
-        <div className="flex flex-col gap-4">
+        <div className="order-2 flex flex-col gap-4 lg:order-1">
           <CollapsiblePanel title="Universe">
             <UniversePanel doc={doc} setDoc={setDoc} />
           </CollapsiblePanel>
@@ -327,7 +327,7 @@ export default function StrategyEditor() {
           </CollapsiblePanel>
         </div>
 
-        <div className="flex flex-col gap-4 lg:sticky lg:top-6 lg:self-start">
+        <div className="order-1 flex flex-col gap-4 self-start lg:order-2">
           <RefinePanel
             doc={doc}
             conversationId={conversationId}
