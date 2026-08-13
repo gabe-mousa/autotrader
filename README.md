@@ -30,13 +30,13 @@ engine, execution safety, paper trading, options design).
 ```
 autotrader/
 ├── backend/          FastAPI app: market data, backtest engine, runtime, broker layer
-├── frontend/          React + TypeScript UI
-├── docs/plan/         Design docs (architecture, schema, safety, roadmap, ...)
-├── strategies/        Your strategy YAML files (gitignored — this is your own data)
-└── schwab/            Vendored Schwab API reference (gitignored in this checkout)
+├── frontend/         React + TypeScript UI
+└── strategies/       Your strategy YAML files
 ```
 
 ## Setup
+
+If we're being honest, the easiest thing these days is just pointing an ai agent through Claude Code or Codex at this repo and having it get things up and running. But if you want to take a crack at the proper setup without that route, follow below. 
 
 Requires Python 3.13+, Node 24+, and a Schwab Developer Portal app
 (client id/secret, callback URL registered as
